@@ -14,10 +14,10 @@ export default function UserInput (){
 
     //initializing a state object with useState
     const [formData, setFormData] = useState({
-        'Initial Investment': 0, //default is zero
-        'Annual Investment': 0,
-        'Expected Return': 0,
-        'Investment Duration': 0
+        initialInvestment: 0, //default is zero
+        annualInvestment: 0,
+        expectedReturn: 0,
+        investmentDuration: 0
     });
 
     //Handler function to update the state based on input changes
@@ -38,18 +38,23 @@ export default function UserInput (){
         <div id='user-input'>
         <form id = 'input-group' onSubmit = {handleSumbitData}>
 
-        <label>{formData['Initial Investment']}</label>
+        <label>Initial Investment:
         <input
         type='number'
         placeholder='Initial Investment'
         name='initial investment'
-        value={formData['Initial Investment']} //bind input value to a state
+        value={(formData.initialInvestment)} //bind input value to a state
         onChange={handleInputChange} //attach onChange even handler with a function that changes the input value 
         />
-        
+        </label>
 
         <button
-        type='submit'>Submit</button>
+            
+            type='submit'
+            >
+            Submit
+            </button>
+
         </form>
         </div>
     );
