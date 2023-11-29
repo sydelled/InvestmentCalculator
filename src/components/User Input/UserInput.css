@@ -30,3 +30,9 @@
     color: #c2e9e0;
     font-size: 1rem;
   }
+
+  input::placeholder {
+    
+    color: #c2e9e0;
+    font-size: .75rem;
+  }

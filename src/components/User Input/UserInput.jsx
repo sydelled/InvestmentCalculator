@@ -4,113 +4,111 @@ import './UserInput.css';
 
 export default function UserInput (){
 
-    //initializing a state object with useState
-    const [formData, setFormData] = useState({
-        initialInvestment: 0, //default is zero
-        annualInvestment: 0,
-        expectedReturn: 0,
-        investmentDuration: 0
-    });
-
-    const [ isEditMode, setIsEditMode ]= useState(false);
-    const [ savedData, setSavedData ] = useState([]);
-
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
-
-    let btnName = 'Edit';
-    if (isEditMode){
-        btnName = 'Save';
-    };
-
-    const handleEditClick = ()=> {
-        setIsEditMode(true);
-        
-        
+    const initialFormData = {
+        initialInvestment: '', 
+        annualInvestment: '',
+        expectedReturn: '',
+        investmentDuration: ''
     };
     
-    const handleSubmit = (event) => {
-        event.preventDefault();//prevents default submission behavior
+    //initializing a state object with useState
+    const [formData, setFormData] = useState(initialFormData);
+    const [ isEditMode, setIsEditMode ]= useState(true);
+    const [ tableData, setTableData ] = useState([]);
 
-        setSavedData([...savedData, formData]);
-        setIsEditMode(false);
-        console.log('Form Data', formData);
-        setFormData({
-            initialInvestment: 0, //default is zero
-            annualInvestment: 0,
-            expectedReturn: 0,
-            investmentDuration: 0
-        });
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData({...formData, [name]: value});
     };
 
-        return (
-        <div 
-        id = 'user-input'
-        >
+    const handleEdit = () => {
+        setIsEditMode(true);
+    };
+
+    const handleSave = () => {
+        setIsEditMode(false);
+        setTableData([...tableData, formData]);
+        setFormData(initialFormData);
+    };
+
+//     const handleInputChange = (event) => {
+//         // const { name, value } = event.target;
+//         // setFormData({
+//         //     ...formData,
+//         //     [name]: value,
+//         // });
+//         setFormData(event.target.value);
+//     };
+
+
+//     let editableInitialInvestment = <input  
+//     type='number'
+//     placeholder='Initial Investment'
+//     value={formData.key} readOnly/>;
+//     let editableAnnualInvestment = <input type="number"
+//     placeholder='Annual Investment'         
+//     value={formData.key} readOnly/>;
+//     let editableExpectedReturn = <input 
+//     type="number"
+//     placeholder='Expected Return' 
+//     value={formData.key} readOnly/>;
+//     let editableInvestmentDuration = <input 
+//     type="number" 
+//     placeholder='Investment Duration'
+//     value={formData.key} readOnly/>;
+//     let btnName = 'Edit';
+
+    
+//     if (isEditMode){
+//     btnName = 'Save';
+//     };
+    
+//     // let editableInitialInvestment = <input type="number" required value={formData.initialInvestment} onChange={handleInputChange}/>;
+//     // let editableAnnualInvestment = <input type="number" required value={formData.annualInvestment} onChange={handleInputChange} />;
+//     // let editableExpectedReturn = <input type="number" required value={formData.expectedReturn} onChange={handleInputChange}/>;
+//     // let editableInvestmentDuration = <input type="number" required value={formData.investmentDuration} onChange={handleInputChange}/>;
         
-        {isEditMode && (
-        <form 
-        className = 'input-group' onSubmit = {handleSubmit}>
+//     // };
 
-        <label>Initial Investment:
-        <input
-        type='number'
-        placeholder='Initial Investment'
-        name='initialInvestment'
-        required value={(formData.initialInvestment)} //bind input value to a state
-        onChange={handleInputChange} //attach onChange even handler with a function that changes the input value 
-        />
-        </label>
-
-        <label>Annual Investment:
-        <input
-        type='number'
-        placeholder='Annual Investment'
-        name='annualInvestment'
-        required value={(formData.annualInvestment)} //bind input value to a state
-        onChange={handleInputChange} //attach onChange even handler with a function that changes the input value 
-        />
-        </label>
-
-        <label>Expected Return:
-        <input
-        type='number'
-        placeholder='Expected Return'
-        name='expectedReturn'
-        required value={(formData.expectedReturn)} //bind input value to a state
-        onChange={handleInputChange} //attach onChange even handler with a function that changes the input value 
-        />
-        </label>
-
-        <label>Duration:
-        <input
-        type='number'
-        placeholder='Duration'
-        name='investmentDuration'
-        required value={(formData.investmentDuration)} //bind input value to a state
-        onChange={handleInputChange} //attach onChange even handler with a function that changes the input value 
-        />
-        </label>
-
+//     const handleEditClick = ()=> {
+//         setIsEditMode(true);
         
-        </form>
-        )}
+//         };
+    
+//     const handleSubmit = (event) => {
+//         event.preventDefault();//prevents default submission behavior
 
-           
-            <button
-            onClick={handleEditClick} >
+//         setSavedData([...savedData, formData]);
+//         setIsEditMode(false);
+//         console.log('Form Data', formData.key);
+//         setFormData({
+//             initialInvestment: 0, //default is zero
+//             annualInvestment: 0,
+//             expectedReturn: 0,
+//             investmentDuration: 0
+//         });
+//     };
+
+//         return (
+//         <div 
+//         id = 'user-input'>
         
-            {btnName}
-            </button>
+//         <form 
+//         className = 'input-group'>
+//         <label>Initial Investment: {editableInitialInvestment}</label>
+//         <label>Annual Investment:{editableAnnualInvestment}</label>
+//         <label>Expected Return:{editableExpectedReturn}</label>
+//         <label>Duration:{editableInvestmentDuration}</label>
+//         </form>
+        
+//             <button
+//             onClick={handleEditClick} >
+//             {btnName}
+//             </button>
             
-        </div>
-    );
-};
+//         </div>
+//     );
+// };
 
 
 
