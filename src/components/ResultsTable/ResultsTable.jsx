@@ -3,9 +3,9 @@ import { useState } from 'react';
 
 
 
-export default function ResultsTable (){
+export default function ResultsTable ( { outputValue } ){
 
-    const [isActive, setIsActive] = useState(false);
+    //const [isActive, setIsActive] = useState(false);
 
     return (
         <div>
@@ -22,11 +22,11 @@ export default function ResultsTable (){
         </thead>
     <tbody>
         <tr>
-            <td>Row 1, Cell 1</td>
-            <td>Row 1, Cell 2</td>
-            <td>Row 1, Cell 3</td>
-            <td>Row 1, Cell 4</td>
-            <td>Row 1, Cell 5</td>
+            <td>Year</td>
+            <td>{outputValue.initialInvestment}</td>
+            <td>{outputValue.annualInvestment}</td>
+            <td>{outputValue.expectedReturn}</td>
+            <td>{outputValue.investmentDuration}</td>
         </tr>
     </tbody>
     
