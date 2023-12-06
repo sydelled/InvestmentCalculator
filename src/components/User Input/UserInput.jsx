@@ -9,7 +9,7 @@ export default function UserInput ({ handleInput }){
         initialInvestment: '', 
         annualInvestment: '',
         expectedReturn: '',
-        investmentDuration: ''
+        duration: ''
     };
     
     const initialEditState = false;
@@ -43,22 +43,17 @@ export default function UserInput ({ handleInput }){
 
 
     const handleChange = (e) => {
-        let { name, value } = e.target;
-
+        const { name, value } = e.target;
         if (value >= 0){
             setSaveData({...saveData, [name]: Number(value)})
-            // setSaveData((prevData) => ({
-            //     ...prevData,
-            //     [name]: Number(value)
-            // }));
-       
     };
+   
 };
 
-let editableInitialInvestment = <input type="number" name='initialInvestment' value={defaultData.initialInvestment} onChange={handleChange} disabled={!isInEditMode}/>;
-let editableAnnualInvestment = <input type="number" name='annualInvestment' value={defaultData.annualInvestment} onChange={handleChange} disabled={!isInEditMode}/>;
-let editableExpectedReturn = <input type="number" name='expectedReturn' value={defaultData.expectedReturn} onChange={handleChange} disabled={!isInEditMode}/>;
-let editableInvestmentDuration = <input type="number" name='investmentDuration' value={defaultData.investmentDuration} onChange={handleChange} disabled={!isInEditMode}/>;
+let editableInitialInvestment = <input type="number" name='initialInvestment' value={saveData.initialInvestment} onChange={handleChange} disabled={!isInEditMode}/>;
+let editableAnnualInvestment = <input type="number" name='annualInvestment' value={saveData.annualInvestment} onChange={handleChange} disabled={!isInEditMode}/>;
+let editableExpectedReturn = <input type="number" name='expectedReturn' value={saveData.expectedReturn} onChange={handleChange} disabled={!isInEditMode}/>;
+let editableInvestmentDuration = <input type="number" name='duration' value={saveData.duration} onChange={handleChange} disabled={!isInEditMode}/>;
 
    
     const handleSubmit = (e) => {
@@ -84,13 +79,12 @@ let editableInvestmentDuration = <input type="number" name='investmentDuration' 
             <label>Annual Investment:{editableAnnualInvestment}</label>
             <label>Expected Return:{editableExpectedReturn}</label>
             <label>Duration:{editableInvestmentDuration}</label>
-        
-        
-
         <button onClick={handleEdit}>Edit</button>
         <button onClick={handleSave}>Save</button>
         <button onClick={handleClear}>Clear</button> 
+        
         </form> 
+        
         </div>       
     );
 };

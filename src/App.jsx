@@ -1,29 +1,30 @@
 import Header from "./components/Header/Header";
 import UserInput from "./components/User Input/UserInput";
 import ResultsTable from "./components/ResultsTable/ResultsTable";
-import { calculateInvestmentResults } from "./util/investment";
+import { calculateInvestmentResults, formatter } from "./util/investment";
 import { useState } from 'react';
 
 function App() {
 
   const [output, setOutput ] = useState({
-    initialInvestment: '', 
-    annualInvestment: '',
-    expectedReturn: '',
-    investmentDuration: ''
+    year: '', 
+    interest: '',
+    valueEndOfYear: '',
+    annualInvestment: ''
 });
 
   const handleInput = (inputValue) => {
-    const processedOutput = {
+    const processedInput = {
     initialInvestment: inputValue.initialInvestment, 
     annualInvestment: inputValue.annualInvestment,
     expectedReturn: inputValue.expectedReturn,
-    investmentDuration: inputValue.investmentDuration
+    duration: inputValue.duration
 
     };
-    console.log('Saved Data', processedOutput);
+    console.log('Saved Data', processedInput);
 
-    setOutput(processedOutput)
+    const calculateInput = calculateInvestmentResults(processedInput);
+    setOutput(calculateInput);
 
   };
   return (

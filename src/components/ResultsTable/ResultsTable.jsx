@@ -1,5 +1,6 @@
 import './ResultsTable.css';
-import { useState } from 'react';
+// import { useState } from 'react';
+// import { formatter } from "./util/investment";
 
 
 
@@ -22,11 +23,11 @@ export default function ResultsTable ( { outputValue } ){
         </thead>
     <tbody>
         <tr>
-            <td>Year</td>
-            <td>{outputValue.initialInvestment}</td>
+            <td>{outputValue.year}</td>
+            <td>{outputValue.investmentValue}</td>
+            <td>{outputValue.interest}</td>
+            <td>{outputValue.valueEndOfYear}</td>
             <td>{outputValue.annualInvestment}</td>
-            <td>{outputValue.expectedReturn}</td>
-            <td>{outputValue.investmentDuration}</td>
         </tr>
     </tbody>
     
