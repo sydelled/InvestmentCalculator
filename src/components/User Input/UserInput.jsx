@@ -1,77 +1,70 @@
 import { useState } from 'react';
 import './UserInput.css';
 
-
-
 export default function UserInput ({ handleInput }){
-
-    const initialFormData = {
-        initialInvestment: '', 
+    
+    const [formData, setFormData] = useState({
+        initialInvestment: '',
         annualInvestment: '',
-        expectedReturn: '',
+        expectedReturn: '', 
         duration: ''
-    };
+    })
     
-    const initialEditState = false;
-    const initialSaveState = [];
-    
+    const [editState, setEditState] = useState(false);
 
-    //initializing a state object with useState
-    const [defaultData, setDefaultData] = useState(initialFormData);
-    const [ isInEditMode, setIsInEditMode ]= useState(initialEditState);
-    const [ saveData, setSaveData ] = useState(initialSaveState);
 
     //when handling edition - it is set to true
     const handleEdit = () => {
-        setIsInEditMode(true);
+        setEditState(true);
     };
 
     const handleSave = () => {
         //when in save mode editing mode is false
-        setIsInEditMode(false);
+        setEditState(false);
 
-        if (isInEditMode === true) {
-        //saving data into a new list
-        //setSaveData([...saveData, defaultData]);
+        if (editState === true) {
         
-        handleInput(saveData);
+        handleInput(formData);
+
+        //sets data back to original after hitting save button
+        setFormData({
+            initialInvestment: '',
+            annualInvestment: '',
+            expectedReturn: '', 
+            duration: ''
+        });
        
-        //after saving form returns to default data
-        //setDefaultData(initialFormData);
         };
+        
     };
 
+    const handleChange = (event) => {
+        let value = event.target.value;
+        let name = event.target.name; 
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        if (value >= 0){
-            setSaveData({...saveData, [name]: Number(value)})
+        setFormData((preValue) => {
+            return {
+                ...preValue,
+                [name] : Number(value)
+            };
+        });
     };
    
-};
 
-let editableInitialInvestment = <input type="number" name='initialInvestment' value={saveData.initialInvestment} onChange={handleChange} disabled={!isInEditMode}/>;
-let editableAnnualInvestment = <input type="number" name='annualInvestment' value={saveData.annualInvestment} onChange={handleChange} disabled={!isInEditMode}/>;
-let editableExpectedReturn = <input type="number" name='expectedReturn' value={saveData.expectedReturn} onChange={handleChange} disabled={!isInEditMode}/>;
-let editableInvestmentDuration = <input type="number" name='duration' value={saveData.duration} onChange={handleChange} disabled={!isInEditMode}/>;
+let editableInitialInvestment = <input type="number" name='initialInvestment' value={formData.initialInvestment} onChange={handleChange} disabled={!editState}/>;
+let editableAnnualInvestment = <input type="number" name='annualInvestment' value={formData.annualInvestment} onChange={handleChange} disabled={!editState}/>;
+let editableExpectedReturn = <input type="number" name='expectedReturn' value={formData.expectedReturn} onChange={handleChange} disabled={!editState}/>;
+let editableInvestmentDuration = <input type="number" name='duration' value={formData.duration} onChange={handleChange} disabled={!editState}/>;
 
    
     const handleSubmit = (e) => {
         e.preventDefault();
-        //handleInput(saveData);
-
-        //after saving form returns to default data
-        setDefaultData(initialFormData);
     };
-
-    
 
     const handleClear = () => {
-        setDefaultData(initialFormData);
+        setFormData(formData);
     };
 
-    
-        
     return (
         <div id='user-input'>
        <form onSubmit={handleSubmit}> 
@@ -79,11 +72,11 @@ let editableInvestmentDuration = <input type="number" name='duration' value={sav
             <label>Annual Investment:{editableAnnualInvestment}</label>
             <label>Expected Return:{editableExpectedReturn}</label>
             <label>Duration:{editableInvestmentDuration}</label>
+        
+        </form> 
         <button onClick={handleEdit}>Edit</button>
         <button onClick={handleSave}>Save</button>
         <button onClick={handleClear}>Clear</button> 
-        
-        </form> 
         
         </div>       
     );
