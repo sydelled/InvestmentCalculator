@@ -42,12 +42,14 @@ export default function UserInput ({ handleInput }){
         let value = event.target.value;
         let name = event.target.name; 
 
-        setFormData((preValue) => {
-            return {
-                ...preValue,
-                [name] : Number(value)
-            };
-        });
+        if (value >= 0){
+            setFormData((preValue) => {
+                return {
+                    ...preValue,
+                    [name] : Number(value)
+                };
+            });
+        };    
     };
    
 

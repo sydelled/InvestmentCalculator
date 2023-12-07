@@ -15,7 +15,7 @@ export default function ResultsTable ( { outputValue } ){
         <thead>
             <tr>
                 <th>Year</th>
-                <th>Investment Value</th>
+                {/* <th>Investment Value</th> */}
                 <th>Interest (year)</th>
                 <th>Total Interest</th>
                 <th>Invested Capital</th>
@@ -24,7 +24,7 @@ export default function ResultsTable ( { outputValue } ){
     <tbody>
         <tr>
             <td>{outputValue.year}</td>
-            <td>{outputValue.investmentValue}</td>
+            {/* <td>{resultsTableInput.initialInvestment}</td> */}
             <td>{outputValue.interest}</td>
             <td>{outputValue.valueEndOfYear}</td>
             <td>{outputValue.annualInvestment}</td>

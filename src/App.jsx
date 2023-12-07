@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 function App() {
 
+  
   const [output, setOutput ] = useState([]);
 
   const handleInput = (inputValue ) => {
@@ -17,8 +18,22 @@ function App() {
       };
     console.log('Saved data:', processedInput);
      const calculateInput = calculateInvestmentResults(processedInput);
-      setOutput(calculateInput);
-      console.log('output', calculateInput);
+
+    let outputObj;
+    
+     calculateInput.forEach((obj) => {
+      outputObj = {
+        year: obj.year,
+        interest: obj.interest,
+        valueEndOfYear: formatter.format(obj.valueEndOfYear),
+        annualInvestment: formatter.format(obj.annualInvestment)
+     };
+      
+    });
+    
+    setOutput(outputObj);
+    console.log('output', outputObj);
+    
     };
   return (
     <>
