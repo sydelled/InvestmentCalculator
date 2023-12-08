@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './UserInput.css';
 
 export default function UserInput ({ handleInput }){
@@ -11,6 +11,7 @@ export default function UserInput ({ handleInput }){
     })
     
     const [editState, setEditState] = useState(false);
+    const [disable, setDisable] = useState(true);
 
 
     //when handling edition - it is set to true
@@ -18,7 +19,7 @@ export default function UserInput ({ handleInput }){
         setEditState(true);
     };
 
-    const handleSave = () => {
+    const handleSave = (e) => {
         //when in save mode editing mode is false
         setEditState(false);
 
@@ -33,15 +34,23 @@ export default function UserInput ({ handleInput }){
             expectedReturn: '', 
             duration: ''
         });
-       
-        };
+    };     
+};
         
-    };
+useEffect(() => {
+    // Check if all fields have values
+    const allFieldsFilled = Object.values(formData).every((val) => val !== '');
+    setDisable(!allFieldsFilled);
+  }, [formData]);
 
     const handleChange = (event) => {
         let value = event.target.value;
         let name = event.target.name; 
 
+        // const emptyField = Object.values(formData).some((val) => val === '');
+        
+        // setDisable(emptyField);
+        
         if (value >= 0){
             setFormData((preValue) => {
                 return {
@@ -49,14 +58,14 @@ export default function UserInput ({ handleInput }){
                     [name] : Number(value)
                 };
             });
-        };    
+        }; 
     };
    
 
-let editableInitialInvestment = <input type="number" name='initialInvestment' value={formData.initialInvestment} onChange={handleChange} disabled={!editState}/>;
-let editableAnnualInvestment = <input type="number" name='annualInvestment' value={formData.annualInvestment} onChange={handleChange} disabled={!editState}/>;
-let editableExpectedReturn = <input type="number" name='expectedReturn' value={formData.expectedReturn} onChange={handleChange} disabled={!editState}/>;
-let editableInvestmentDuration = <input type="number" name='duration' value={formData.duration} onChange={handleChange} disabled={!editState}/>;
+    let editableInitialInvestment = <input type="number" name='initialInvestment' value={formData.initialInvestment} onChange={handleChange} disabled={!editState}/>;
+    let editableAnnualInvestment = <input type="number" name='annualInvestment' value={formData.annualInvestment} onChange={handleChange} disabled={!editState}/>;
+    let editableExpectedReturn = <input type="number" name='expectedReturn' value={formData.expectedReturn} onChange={handleChange} disabled={!editState}/>;
+    let editableInvestmentDuration = <input type="number" name='duration' value={formData.duration} onChange={handleChange} disabled={!editState}/>;
 
    
     const handleSubmit = (e) => {
@@ -64,7 +73,12 @@ let editableInvestmentDuration = <input type="number" name='duration' value={for
     };
 
     const handleClear = () => {
-        setFormData(formData);
+        setFormData({
+            initialInvestment: '',
+            annualInvestment: '',
+            expectedReturn: '', 
+            duration: ''
+        });
     };
 
     return (
@@ -74,11 +88,13 @@ let editableInvestmentDuration = <input type="number" name='duration' value={for
             <label>Annual Investment:{editableAnnualInvestment}</label>
             <label>Expected Return:{editableExpectedReturn}</label>
             <label>Duration:{editableInvestmentDuration}</label>
+
+        <button onClick={handleEdit}>Edit</button>
+        <button onClick={handleSave} disabled={disable}>Save</button>
+        <button onClick={handleClear}>Clear</button> 
         
         </form> 
-        <button onClick={handleEdit}>Edit</button>
-        <button onClick={handleSave}>Save</button>
-        <button onClick={handleClear}>Clear</button> 
+        
         
         </div>       
     );

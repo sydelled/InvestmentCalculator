@@ -22,14 +22,15 @@ function App() {
     let outputObj;
     
      calculateInput.forEach((obj) => {
-      outputObj = {
-        year: obj.year,
-        interest: obj.interest,
-        valueEndOfYear: formatter.format(obj.valueEndOfYear),
-        annualInvestment: formatter.format(obj.annualInvestment)
-     };
       
+        outputObj = {
+          year: obj.year,
+          interest: formatter.format(obj.interest),
+          valueEndOfYear: formatter.format(obj.valueEndOfYear),
+          annualInvestment: formatter.format(obj.annualInvestment)
+       };
     });
+    
     
     setOutput(outputObj);
     console.log('output', outputObj);
