@@ -19,7 +19,7 @@ export default function UserInput ({ handleInput }){
         setEditState(true);
     };
 
-    const handleSave = (e) => {
+    const handleSave = () => {
         //when in save mode editing mode is false
         setEditState(false);
 
@@ -46,10 +46,6 @@ useEffect(() => {
     const handleChange = (event) => {
         let value = event.target.value;
         let name = event.target.name; 
-
-        // const emptyField = Object.values(formData).some((val) => val === '');
-        
-        // setDisable(emptyField);
         
         if (value >= 0){
             setFormData((preValue) => {
