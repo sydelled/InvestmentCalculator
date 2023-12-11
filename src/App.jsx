@@ -22,22 +22,23 @@ function App() {
     console.log('Saved data:', processedInput);
     const calculateInput = calculateInvestmentResults(processedInput);
     
-    let outputObj;
-    
      calculateInput.forEach((obj) => {
       
-        outputObj = {
+    console.log(obj);
+        const outputObj = {
           year: obj.year,
           interest: formatter.format(obj.interest),
           valueEndOfYear: formatter.format(obj.valueEndOfYear),
           annualInvestment: formatter.format(obj.annualInvestment)
        };
+      //  console.log('output', outputObj);
+      setOutput(outputObj);
+       
     });
     
-    setOutput(outputObj);
-    console.log('output', outputObj);
-    
     };
+
+
   return (
     <>
 
