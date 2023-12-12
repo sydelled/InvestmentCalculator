@@ -87,10 +87,11 @@ useEffect(() => {
             <label>Expected Return:{editableExpectedReturn}</label>
             <label>Duration:{editableInvestmentDuration}</label>
 
-        <button onClick={handleEdit}>Edit</button>
-        <button onClick={handleSave} disabled={disable}>Save</button>
-        <button onClick={handleClear}>Clear</button> 
-        
+        <div className='button-wrapper'>
+        <button className='button-33' onClick={handleEdit} disabled={editState}>Edit</button>
+        <button className='button-33' onClick={handleSave} disabled={disable}>Save</button>
+        <button className='button-33' onClick={handleClear} disabled={!editState}>Clear</button> 
+        </div>
         </form> 
         
         
