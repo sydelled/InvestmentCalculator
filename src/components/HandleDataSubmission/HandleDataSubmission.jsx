@@ -1,15 +1,14 @@
-import Header from "./components/Header/Header";
-import UserInput from "./components/UserInput/UserInput";
-import ResultsTable from "./components/ResultsTable/ResultsTable";
-import { calculateInvestmentResults, formatter } from "./util/investment";
+import UserInput from "../UserInput/UserInput";
+import ResultsTable from "../ResultsTable/ResultsTable";
 import { useState } from 'react';
-import './index.css';
+import { calculateInvestmentResults, formatter } from "../../util/investment";
 
 
-function App() {
+export default function HandleDataSubmission ({ onUpdateData }){
+
   const [output, setOutput ] = useState([]);
   const [input, setInput] = useState([]);
-  const [isActive, setIsActive] = useState(false);
+//   const [isActive, setIsActive] = useState(false);
   
   const handleInput = (inputValue) => {
       let processedInput = {
@@ -21,10 +20,14 @@ function App() {
 
         setInput([...input, processedInput]);
         console.log('Saved data:', processedInput);
-      
-    
-      
-          
+       
+        return processedInput;
+    };
+
+    // const inputData = handleInput(processInput)
+
+    const handleOutput = () => {
+        const processedInput = handleInput(processInput);
         const calculateInput = calculateInvestmentResults(processedInput);
         let outputObj; 
         calculateInput.forEach((obj) => {
@@ -36,23 +39,16 @@ function App() {
                 annualInvestment: formatter.format(obj.annualInvestment)
             };      
         });
-        // setIsActive(true);
-        setOutput([...output, outputObj]);
-        setIsActive(true);
-    
-      };
-  
-
-  return (
-    <>
-    <Header/>
-    <main>
-    <UserInput handleInput={handleInput}/>
-    <ResultsTable outputValue={output} inputValue={input} isActive={isActive} />
-    </main>
-    </>
-  );
+         // setIsActive(true);
+         setOutput([...output, outputObj]);
+    };
+      
+       
+    return(
+        <>
+        <UserInput handleInput={handleInput}/>
+        <ResultsTable outputValue={handleOutput} inputValue={inputValue} />
+        </>
+    );
+          
 };
-
-export default App
-

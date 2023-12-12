@@ -2,8 +2,7 @@ import img from "../../assets/investment-calculator-logo.png";
 import './Header.css';
 
 export default function Header(){
-   //FETCHS USER INPUT
-   //OUTPUTS RESULTS TABLE
+   
 
    return (
     <div id="header">

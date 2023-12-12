@@ -8,10 +8,11 @@ export default function UserInput ({ handleInput }){
         annualInvestment: '',
         expectedReturn: '', 
         duration: ''
-    })
+    });
     
     const [editState, setEditState] = useState(false);
     const [disable, setDisable] = useState(true);
+    
 
 
     //when handling edition - it is set to true
@@ -66,6 +67,7 @@ useEffect(() => {
    
     const handleSubmit = (e) => {
         e.preventDefault();
+        
     };
 
     const handleClear = () => {
